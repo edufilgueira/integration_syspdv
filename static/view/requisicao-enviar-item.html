@@ -1,0 +1,69 @@
+<form name="form">
+<h3>Enviar para produção</h3>
+<hr>
+<div class="container">
+
+  <div class="row" >
+    <div class="col-xs-5">
+		<label for="data">Data</label>
+		<input type="text" name="txtData" ng-model="requisicao.REQDATEMI" required class="form-control">
+		<span ng-show="form.txtData.$error.required && form.txtData.$dirty">Data obrigatório</span>
+	</div>
+	<div class="col-xs-7">
+		<label required for="Setor">Setor</label>
+		<select class="form-control" name="sctSetor" ng-model="requisicao.REQSETCOD" ng-options="setor.SETDES for setor in setores track by setor.SETCOD">
+			<option value="">Selecione o local</option>
+		</select>
+		<span ng-show="form.sctSetor.$error.required && form.sctSetor.$dirty">Local obrigatório</span>
+	</div>
+  </div>
+  <div class="row" >
+	<div class="col-xs-5">
+		<label for="Modelo">Modelo</label><br>
+
+			<input required type="radio" name="modelo" id="modelo1" value="1" ng-model="requisicao.REQMODELO"> Direta
+			<input required type="radio" name="modelo" id="modelo2" value="2" ng-model="requisicao.REQMODELO"> Entrega
+			<span ng-show="form.modelo1.$error.required || form.modelo2.$error.required ">Campo retorno obrigatório</span>
+
+
+	</div>
+	<div class="col-xs-7">
+		<label for="Tipo">Tipo</label><br>
+
+			<input required type="radio" name="tipo" id="tipo1" value="C" ng-model="requisicao.REQTIPO" checked> Consumo
+			<input required type="radio" name="tipo" id="tipo2" value="T" ng-model="requisicao.REQTIPO"> Transferência
+			<span ng-show="form.tipo1.$error.required || form.tipo2.$error.required ">Campo retorno obrigatório</span>
+
+		
+		</div>&nbsp;				
+	</div>
+  
+  <div class="row" >
+	<div class="col-xs-5">
+		<label for="Origem">Origem</label>
+		<select class="form-control" id="sctLocal" ng-model="requisicao.REQLOCORI" ng-options="local.LOCDES for local in locais track by local.LOCCOD" ng-disabled="desabilitarBotao">
+			<option value="">Selecione o local</option>
+		</select>  
+	</div>
+	<div class="col-xs-7">
+		<label for="Destino">Destino</label>
+		<select class="form-control" id="sctLocal" ng-model="requisicao.REQLOCDES" ng-options="local.LOCDES for local in locais track by local.LOCCOD" ng-disabled="desabilitarBotao">
+			<option value="">Selecione o local</option>
+		</select>  
+	</div>
+  </div>
+  <div class="row" >
+		<div class="col-xs-12">
+			<label for="obs">Observação</label>
+			<textarea class="form-control custom-control" rows="5" style="resize:none" ng-model="requisicao.REQOBS"></textarea>
+		</div>
+  </div>
+  <div class="row" >
+		<div class="col-xs-12">
+			<button type="submit" ng-disabled="form.$invalid"  class="btn btn-primary" ng-click="salvar()"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Enviar</button>
+		</div>
+  </div>
+  
+
+</div>
+</form>

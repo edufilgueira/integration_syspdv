@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      
+    </div>
+  </div>
+	<div class="row" >
+			<a href="" ng-click="abrirRequisicao();" class="btn btn-success" style="float: left"><span class="glyphicon glyphicon-plus"></span></a>
+			<input type="text" required name="txtData" ng-model="data" class="form-control requisicao-data" maxlength="10" onkeypress="mascaraData( this, event )" placeholder="99/99/9999">
+			<span ng-show="frm.txtData.$error.required && frm.txtData.$dirty">Data obrigatória</span>
+			<br>
+			<div ng-show="exibirObservacao()" class="alert alert-warning" role="alert">{{requisicao.REQOBS}}</div>
+	</div>
+  <div class="row" >
+    <div class="col">
+	
+		<table class="table table-striped table-hover table-bordered table-sm">
+			<thead>
+				<tr>
+					<th width="18%" >GRUPO</span></th>
+					<th >NOME</span></th>
+					<th class="txtcentro" width="3%">PEDIDO</span></th>
+					<th class="txtcentro" width="70px" class="txtcentro">QTD</span></th>
+					<th class="txtcentro" width="88px" class="txtcentro">E</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="estoque in estoques">
+					<td ng-class="marcarVermelho(estoque.RQPQTDENT,estoque.RQPQTD);" style="vertical-align: middle;">{{ estoque.GRPDES }}</td>
+					<td ng-class="marcarVermelho(estoque.RQPQTDENT,estoque.RQPQTD);" style="vertical-align: middle;">{{ estoque.PRODES }}</td>
+					<td ng-class="marcarVermelho(estoque.RQPQTDENT,estoque.RQPQTD);" class="txtcentro celula-estoquemin"  style="vertical-align: middle;">{{ estoque.RQPQTD }}</td>
+					<td style="vertical-align: middle;"><input type="text" ng-blur="adicionarText(estoque)" ng-model="estoque.RQPQTDENT" class="form-control" style="text-align: center; font-size: 20px; padding:0px 0px 0px 0px "></td>
+					<td style="vertical-align: middle;">
+						<button ng-click="adicionar(estoque,true,1)"  class="btn btn-primary" style="float: left; width: 33px; height: 33px; margin-bottom: 5px; margin-right: 5px;">+1</button>
+						<button ng-click="adicionar(estoque,false,1)" class="btn btn-primary" style="float: left; width: 33px; height: 33px; margin-bottom: 5px;">-1</button>
+						<button ng-click="adicionar(estoque,true,5)"  class="btn btn-warning" style="float: left; width: 33px; height: 33px; margin-right: 5px;">+5</button>
+						<button ng-click="adicionar(estoque,false,5)" class="btn btn-warning" style="float: left; width: 33px; height: 33px;">-5</button>					
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+    </div>
+  </div>
+</div>

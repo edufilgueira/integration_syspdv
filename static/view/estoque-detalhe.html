@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>Ajuste de estoque</h3>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col">
+
+		<form name="frmEstoque">
+		  <div class="form-group">
+		    <button type="submit" ng-disabled="!desabilitarBotao" class="btn btn-success" ng-click="novo()"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Novo</button>
+		    <button type="submit" ng-disabled="frmEstoque.$invalid"  class="btn btn-primary" ng-click="salvar()"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Salvar</button>
+		    <button type="submit" ng-disabled="desabilitarBotao"  class="btn btn-primary " ng-click="cancelar()"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Cancelar</button>
+		    <a href="syspdv/#/estoque" class="btn btn-danger"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Voltar</a>
+		    <hr>
+		  </div> 
+		  <div class="form-row">
+		  
+
+			<div class="container">
+			  <div class="row">
+				<div class="col">
+					<label for="exampleInputEmail1">Local</label>
+					<select class="form-control" id="sctLocal" ng-model="estoque.LOCCOD" ng-options="local.LOCDES for local in locais track by local.LOCCOD" ng-disabled="desabilitarBotao">
+						<option value="">Selecione o local</option>
+					</select>
+					<span ng-show="frmEstoque.sctLocal.$error.required && frmEstoque.sctLocal.$dirty">Campo local obrigatório</span>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col">
+					<label for="exampleInputEmail1">Produto</label>
+					<select class="form-control" id="sctProduto" ng-model="estoque.PROCOD" ng-options="produto.PRODES for produto in produtos track by produto.PROCOD" ng-disabled="desabilitarBotao">
+						<option value="">Selecione o produto</option>
+					</select>
+					<span ng-show="frmEstoque.sctProduto.$error.required && frmEstoque.sctProduto.$dirty">Campo produto obrigatório</span>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col">
+					<div ng-show="desabilitarTxtObservacao" >
+						<label for="exampleInputEmail1">Observação</label>
+						<input type="text" name="txtObservacao" ng-model="estoque.EAMMTV" ng-disabled="desabilitarBotao" required ng-minlength="3" class="form-control">
+						<span ng-show="frmEstoque.txtObservacao.$error.required && frmEstoque.txtObservacao.$dirty">Campo retorno obrigatório</span>
+						<span ng-show="frmEstoque.txtObservacao.$error.minlength && frmEstoque.txtObservacao.$dirty">Digite no mínimo 3 caracteres</span>
+					</div>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col">
+					<br/>
+					
+					<div class="input-group">
+					  <div class="input-group-prepend">
+						<div class="input-group-text" style="float: left;">
+						<input id="radAjucod1" name="radAjucod" value="01" type="radio" ng-click="mostrarTxtObservacao(false);" ng-model="estoque.AJUCOD" aria-label="Radio button for following text input" ng-disabled="desabilitarBotao"> Positivo
+						<input id="radAjucod2" name="radAjucod" value="02" type="radio" ng-click="mostrarTxtObservacao(true);" ng-model="estoque.AJUCOD" aria-label="Radio button for following text input" ng-disabled="desabilitarBotao"> Negativo
+						<span ng-show="frmEstoque.radAjucod1.$error.required || frmEstoque.radAjucod2.$error.required ">Campo retorno obrigatório</span>
+						</div>
+						<div class="estoque-atual" ng-class="estoqueAlerta();" role="alert">{{estoqueAual}}</div>
+					  </div>
+					</div>
+					
+				</div>
+				<div class="col">
+					<br/>
+					<label for="exampleInputEmail1">Quantidade</label>&nbsp;
+					<br/>
+					<input type="text" id="txtQuantidade" name="txtQuantidade" ng-model="estoque.EAMQTD" ng-disabled="desabilitarBotao" required class="form-control" style="width: 80px; float: left;" onkeypress="return somenteNumero(event);">&nbsp;
+					<button ng-click="adicionar(true,1)" class="btn btn-primary"  ng-disabled="desabilitarBotao"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 1</button>
+					<button ng-click="adicionar(false,1)" class="btn btn-primary" ng-disabled="desabilitarBotao"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> 1</button>
+					<button ng-click="adicionar(true,5)" class="btn btn-warning"  ng-disabled="desabilitarBotao"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 5</button>
+					<button ng-click="adicionar(false,5)" class="btn btn-warning" ng-disabled="desabilitarBotao"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> 5</button>
+					<span ng-show="frmEstoque.txtQuantidade.$error.required && frmEstoque.txtQuantidade.$dirty">Retorno obrigatório</span>
+				</div>
+			  </div>
+
+			</div>		  
+
+
+		  </div>
+		  &nbsp;
+		  
+		</form>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>Histórico de requisições</h3>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col">
+
+		<form>
+		  <div class="form-row">
+		  	<input type="text" ng-model="pesquisa" class="form-control" placeholder="Procurando... ?">
+		  </div>
+		  
+		  <hr>
+		  
+		</form>
+
+		
+		<table class="table table-striped table-hover table-bordered table-sm">
+			<thead>
+				<tr>
+					<th ng-click="sortData('REQDATEMI')">Data <span ng-class="getSortClass('REQDATEMI')"></span></th>				
+					<th width="3%" class="txtcentro">STATUS</th>
+					<th width="3%" class="txtcentro">A</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="requisicao in requisicoes | filter:pesquisa | orderBy:sortColumn:reverseSort" style="font-size: 25px;">
+					<td ng-class="setCorVermelho(requisicao.REQSTATUS)">{{ requisicao.REQDATEMI }}</td>					
+					<td ng-class="setCorVermelho(requisicao.REQSTATUS)" class="txtcentro">{{ requisicao.REQSTATUS }}</td>
+					<td><a ng-show="requisicao.QTDPRO > 0"href="syspdv/#/requisicao-enviar/{{requisicao.REQNUM}}"><img src="syspdv/static/img/alterar.png"  width="22px" style="    margin: -3px 0px 0px 0px;"/></a></td>
+				</tr>
+			</tbody>
+		</table>
+
+    </div>
+  </div>
+</div>

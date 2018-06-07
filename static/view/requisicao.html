@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>Selecione os produtos</h3>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col">
+
+		<form name="frm">
+		  <div class="form-row">
+		  	<input type="text" ng-model="pesquisa" class="form-control" placeholder="Procurando... ?">
+		  </div>
+		  &nbsp;
+		  <div class="form-group">
+			<a href="" ng-click="abrirRequisicao();" class="btn btn-success" style="float: left"><span class="glyphicon glyphicon-plus"></span></a>
+			<button type="submit" ng-disabled="exibirBotaoEnviarRequisicao"  class="btn btn-primary " ng-click="botaEnviarRequisicao()" style="float: right"><span class="glyphicon glyphicon-share-alt"></span></button>
+			
+			<input type="text" required name="txtData" ng-model="data" ng-blur="salvarCabecalhoRequisicao()" class="form-control requisicao-data" maxlength="10" onkeypress="mascaraData( this, event )" placeholder="99/99/9999">
+			<span ng-show="frm.txtData.$error.required && frm.txtData.$dirty">Data obrigatória</span>
+			
+		  </div> 		  
+		  
+		</form>
+			<div class="form-group">
+			<select class="form-control" id="selGrupo" ng-model="estoque.secao" ng-options="secao.SECDES for secao in secoes track by secao.SECCOD" ng-change="consultarPorSecao();" style="width: 50%;float: left;">
+				<option value="">Seção</option>
+			</select>
+			
+			<select class="form-control" id="selGrupo" ng-model="estoque.grupo" ng-options="grupo.GRPDES for grupo in grupos track by grupo.GRPCOD" ng-change="consultarPorGrupo();" style="width: 50%">
+				<option value="">Grupo</option>
+			</select>
+			 </div>		
+		<table ng-show="exibirListaProdutos" class="table table-striped table-hover table-bordered table-sm">
+			<thead>
+				<tr>
+					<th ng-click="sortData('ID')" width="43px"># <span ng-class="getSortClass('ID')"></span></th>
+					<th ng-click="sortData('PRODES')">NOME <span ng-class="getSortClass('PRODES')"></span></th>
+					<th ng-click="sortData('ESTATU')" width="3%">EST <span ng-class="getSortClass('ESTATU')"></span></th>
+					<th width="3%">E</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="estoque in estoques | filter:pesquisa | orderBy:sortColumn:reverseSort">
+					<td>{{ estoque.ID }}</td>
+					<td>{{ estoque.PRODES }}</td>
+					<td ng-class="setEstoqueMin(estoque.ESTATU, estoque.PROESTMIN);">{{ estoque.ESTATU }}</td>
+					<td><input type="checkbox" id="{{ estoque.PROCOD }}" class="alter-checkbox" ng-checked="setCheckboxEstoque(estoque.REQPRO)" ng-click="selecionarProduto(estoque.PROCOD)" style="margin: 0px -3px 0px 1px;" /></td>
+				</tr>
+			</tbody>
+		</table>
+
+    </div>
+  </div>
+</div>
