@@ -18,6 +18,6 @@ require 'routes/requisicao.php';
 require 'routes/requisicao-produto.php';
 require 'routes/funcao-suporte.php';
 require 'routes/setor.php';
-
+require 'routes/venda.php';
 
 $app->run();
